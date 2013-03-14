@@ -14,7 +14,7 @@ public class Reverse extends Question {
 	}
 
 	@Test(dataProvider = "TestCases")
-	public void resolve(Node<Integer> node) {
+	public void resolve_singleLink(Node<Integer> node) {
 		Log("Original list:" + node);
 		
 		if(node != null){
@@ -35,9 +35,8 @@ public class Reverse extends Question {
 		Log("Reversed list:" + node);
 	}
 
-	@SuppressWarnings("unchecked")
 	@DataProvider(name = "TestCases")
-	public static Node<Integer>[][] TestCases() {
+	public static Object[][] TestCases() {
 		return new Node[][] { { null }, { Node.Create(new Integer[] { 1 }) },
 				{ Node.Create(new Integer[] { 1, 2 }) },
 				{ Node.Create(new Integer[] { 1, 2, 3, 4, 5 }) } };
