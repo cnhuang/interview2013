@@ -1,0 +1,33 @@
+package interview2013.questions.algo;
+
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import interview2013.util.Question;
+import interview2013.util.ds.CharNode;
+
+public class LongestPalindrome extends Question {
+
+	@Override
+	public String getQuestion() {
+		return "http://stackoverflow.com/questions/7043778/longest-palindrome-in-a-string-using-suffix-tree";
+	}
+
+	@Test(dataProvider = "dataProvider")
+	public void findLongestPalindrome(String input) {
+
+		CharNode root = new CharNode();
+
+		for()
+		for (char c : input.toCharArray()) {
+			
+		}
+
+	}
+
+	@DataProvider
+	public static String[][] dataProvider() {
+		return new String[][] { { "banana" } };
+	}
+
+}

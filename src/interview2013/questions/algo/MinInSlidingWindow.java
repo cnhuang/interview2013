@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import interview2013.util.Question;
 
-public class FindMinInSlidingWindow extends Question {
+public class MinInSlidingWindow extends Question {
 
 	@Override
 	public String getQuestion() {

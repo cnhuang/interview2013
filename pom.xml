@@ -4,4 +4,11 @@
   <artifactId>interview2013</artifactId>
   <version>0.0.1-SNAPSHOT</version>
  
+  <dependencies>
+  	<dependency>
+  		<groupId>org.testng</groupId>
+  		<artifactId>testng</artifactId>
+  		<version>6.8.1</version>
+  	</dependency>
+  </dependencies>
 </project>
