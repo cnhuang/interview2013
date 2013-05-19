@@ -2,6 +2,7 @@ package ds.tree;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Random;
 
 import org.testng.annotations.Test;
@@ -85,6 +86,10 @@ public class TreeNode<T> {
 		return sb.toString();
 	}
 
+	public String toString() {
+		return String.valueOf(data);
+	}
+
 	private static Random random = new Random(System.currentTimeMillis());
 
 	public static TreeNode<Integer> getRandomTree() {
@@ -113,6 +118,7 @@ public class TreeNode<T> {
 			return null;
 
 		TreeNode<Integer> n = new TreeNode<Integer>(data);
+
 		n.left = getRandomTree(cache, start, end);
 		n.right = getRandomTree(cache, start, end);
 
@@ -139,7 +145,7 @@ public class TreeNode<T> {
 				break;
 			}
 		}
-
+ 
 		if (data == null)
 			return null;
 
@@ -150,7 +156,27 @@ public class TreeNode<T> {
 		n.left = getBinarySearchTree(cache, start, data - 1);
 		n.right = getBinarySearchTree(cache, data + 1, end);
 
+
 		return n;
+	}
+
+	public static TreeNode<?> cleanVisited(TreeNode<?> t) {
+
+		Queue<TreeNode<?>> queue = new LinkedList<TreeNode<?>>();
+		queue.add(t);
+
+		while (queue.size() > 0) {
+
+			TreeNode<?> node = queue.poll();
+			node.visited = false;
+
+			if (node.left != null)
+				queue.add(node.left);
+			if (node.right != null)
+				queue.add(node.right);
+		}
+
+		return t;
 	}
 
 	@Test
