@@ -14,7 +14,7 @@ public abstract class Question {
 		Log("\n");
 	}
 
-	public void Log(String message) {
+	public static void Log(String message) {
 		Reporter.log(message, true);
 	}
 }
