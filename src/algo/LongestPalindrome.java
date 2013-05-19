@@ -19,7 +19,7 @@ public class LongestPalindrome extends Question {
 
 		CharNode root = new CharNode();
 
-		for()
+		
 		for (char c : input.toCharArray()) {
 			
 		}
