@@ -53,6 +53,7 @@ public class DFS extends Question {
 			}
 		}
 
+		TreeNode.cleanVisited(root);
 		return result;
 	}
 
@@ -78,6 +79,7 @@ public class DFS extends Question {
 			}
 		}
 
+		TreeNode.cleanVisited(root);
 		return result;
 	}
 
@@ -106,6 +108,8 @@ public class DFS extends Question {
 				stack.pop();
 
 		}
+		
+		TreeNode.cleanVisited(root);
 		return result;
 
 	}
