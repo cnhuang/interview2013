@@ -92,7 +92,8 @@ public class TreeNode<T> {
 		return getRandomTree(new boolean[50], 0, 50);
 	}
 
-	private static TreeNode<Integer> getRandomTree(boolean[] cache, int start, int end) {
+	private static TreeNode<Integer> getRandomTree(boolean[] cache, int start,
+			int end) {
 
 		if (end <= start)
 			return null;
@@ -100,7 +101,7 @@ public class TreeNode<T> {
 		Integer data = null;
 
 		for (int i = 0; i < 10; i++) {
-			int index = random.nextInt(end - start);
+			int index = random.nextInt(end - start + 1);
 			if (!cache[index]) {
 				cache[index] = true;
 				data = index + start;
@@ -112,8 +113,42 @@ public class TreeNode<T> {
 			return null;
 
 		TreeNode<Integer> n = new TreeNode<Integer>(data);
-		n.left = getRandomTree(cache, start, (start + end) / 2);
-		n.right = getRandomTree(cache, (start + end) / 2, end);
+		n.left = getRandomTree(cache, start, end);
+		n.right = getRandomTree(cache, start, end);
+
+		return n;
+	}
+
+	public static TreeNode<Integer> getBinarySearchTree() {
+		return getBinarySearchTree(new boolean[50], 0, 50);
+	}
+
+	private static TreeNode<Integer> getBinarySearchTree(boolean[] cache,
+			int start, int end) {
+
+		if (end <= start)
+			return null;
+
+		Integer data = null;
+
+		for (int i = 0; i < 10; i++) {
+			int index = random.nextInt(end - start + 1);
+			if (!cache[index]) {
+				cache[index] = true;
+				data = index + start;
+				break;
+			}
+		}
+
+		if (data == null)
+			return null;
+
+		System.out
+				.println("Start: " + start + ",End:" + end + ", Data:" + data);
+
+		TreeNode<Integer> n = new TreeNode<Integer>(data);
+		n.left = getBinarySearchTree(cache, start, data - 1);
+		n.right = getBinarySearchTree(cache, data + 1, end);
 
 		return n;
 	}
