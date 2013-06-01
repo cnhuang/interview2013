@@ -1,60 +1,123 @@
 package dp;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
-public class LongestIncreasingSubsequence
-{
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
-	public static void main(String[] args)
-	{
-		int[] arr = { 13, 14, 10, 11, 9, 30, 13, 31, 12, 14, 33, 1 };
-		Find(arr);
+import util.Question;
+
+public class LongestIncreasingSubsequence extends Question {
+
+	@Override
+	public String getQuestion() {
+
+		return "find longest increasing subsequesnce. ex: int[] arr = { 13, 14, 10, 11, 9, 30, 13, 31, 12, 14, 33, 1 }";
 	}
 
-	// N^2 time
-	public static void Find(int[] input)
-	{
-		Hashtable<Integer, ArrayList<Integer>> map = new Hashtable<Integer, ArrayList<Integer>>();
-		ArrayList<Integer> max = new ArrayList<Integer>();
-		for (int i = 0; i < input.length; i++)
-		{
-			ArrayList<Integer> r = Find(input, i, map);
-			if (r.size() > max.size())
-				max = r;
+	private int iteration = 0;
+
+	@Test(dataProvider = "dataProvider")
+	public void find(Integer[] arr) {
+
+		iteration = 0;
+		Log("Input:" + Arrays.toString(arr));
+		List<Integer> longest = new LinkedList<Integer>();
+		for (int i = arr.length - 1; i >= 0; i--) {
+			iteration++;
+
+			List<Integer> tmp = find(i, arr);
+			if (tmp.size() > longest.size())
+				longest = tmp;
+
+			if (longest.size() >= i - 1)
+				break;
 		}
 
-		for (int i : max)
-			System.out.print(input[i] + " ");
+		Log("Result:" + longest);
+		Log("Iteration:" + iteration);
+
+		iteration = 0;
+		Map<Integer, List<Integer>> cache = new HashMap<Integer, List<Integer>>();
+		longest = new LinkedList<Integer>();
+		for (int i = arr.length - 1; i >= 0; i--) {
+			iteration++;
+
+			List<Integer> tmp = find(i, arr, cache);
+			if (tmp.size() > longest.size())
+				longest = tmp;
+
+			if (longest.size() >= i - 1)
+				break;
+		}
+		Log("Result:" + longest);
+		Log("Iteration (Cached):" + iteration);
 	}
 
-	private static ArrayList<Integer> Find(int[] input, int index,
-			Hashtable<Integer, ArrayList<Integer>> map)
-	{
-		if (map.containsKey(index))
-			return map.get(index);
+	private List<Integer> find(int index, Integer[] arr) {
 
-		ArrayList<Integer> max = new ArrayList<Integer>();
+		List<Integer> list = new LinkedList<Integer>();
 
-		for (int i = index - 1; i >= 0; i--)
-		{
-			if (input[i] < input[index])
-			{
-				ArrayList<Integer> tmp = Find(input, i, map);
-				if (tmp.size() > max.size())
-				{
-					max = new ArrayList<Integer>();
-					max.addAll(tmp);
-				}
+		if (index == 0) {
+			list.add(arr[index]);
+			iteration++;
+			return list;
+		}
+
+		List<Integer> longest = new LinkedList<Integer>();
+		for (int i = index - 1; i >= 0; i--) {
+			iteration++;
+			if (arr[index] >= arr[i]) {
+				List<Integer> tmp = find(i, arr);
+				if (tmp.size() > longest.size())
+					longest = tmp;
+
+				if (longest.size() >= i - 1)
+					break;
 			}
 		}
 
-		max.add(index);
-		map.put(index, max);
-
-		return max;
+		longest.add(arr[index]);
+		return longest;
 	}
 
-	// Nlogn Time
+	private List<Integer> find(int index, Integer[] arr, Map<Integer, List<Integer>> cache) {
 
+		List<Integer> list = new LinkedList<Integer>();
+
+		if (index == 0) {
+			list.add(arr[index]);
+			iteration++;
+			return list;
+		}
+
+		if (cache.containsKey(index))
+			return cache.get(index);
+
+		List<Integer> longest = new LinkedList<Integer>();
+		for (int i = index - 1; i >= 0; i--) {
+			iteration++;
+			if (arr[index] >= arr[i]) {
+				List<Integer> tmp = find(i, arr, cache);
+				if (tmp.size() > longest.size())
+					longest = tmp;
+
+				if (longest.size() >= i - 1)
+					break;
+			}
+		}
+
+		longest.add(arr[index]);
+		cache.put(index, longest);
+		return longest;
+	}
+
+	@DataProvider
+	public static Object[][] dataProvider() {
+		return new Object[][] { { new Integer[] { 13, 14, 10, 11, 9, 30, 13, 31, 12, 14, 33, 1 } } };
+	}
 }
