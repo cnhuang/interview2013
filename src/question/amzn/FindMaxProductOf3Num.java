@@ -1,4 +1,4 @@
-package question;
+package question.amzn;
 
 import java.util.Arrays;
 

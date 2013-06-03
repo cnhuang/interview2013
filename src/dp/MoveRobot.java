@@ -1,53 +1,78 @@
 package dp;
 
 import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 
-public class MoveRobot
-{	
-	
-	public static void main(String[] args)
-	{
-		int x = 20;
-		int y = 20;
-		System.out.println(MoveTo2(x,y,new Hashtable<String,BigInteger>()));
-		System.out.println(MoveTo(x,y));
-		
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import util.Question;
+
+public class MoveRobot extends Question {
+
+	private int iteration = 0;
+
+	@Override
+	public String getQuestion() {
+		return "Given a NxN matrix, find # appraqoches to move from (0,0) to (n-1,n-1). Only move to right and down.";
 	}
-	
-	
-	public static int MoveTo(int x, int y)
-	{
-		if(x < 0 || y < 0)
+
+	@Test(dataProvider = "dataProvider")
+	public void move(int N) {
+
+		Log("Matrix Size " + N + "x" + N);
+		iteration = 0;
+		Log((move(N, 0, 1) + move(N, 1, 0)) + " approaches.");
+		Log("No cache:" + iteration + " iterations.");
+
+		iteration = 0;
+		Map<String, Integer> cache = new HashMap<String, Integer>();
+		Log((move_cache(N, 0, 1, cache) + move_cache(N, 1, 0, cache))
+				+ " approaches.");
+		Log("Cache:" + iteration + " iterations.");
+	}
+
+	private Integer move(int N, int x, int y) {
+		// Log("Move to (" + x + "," + y + ")");
+		iteration++;
+		if (x > N - 1)
 			return 0;
-		
-		if(x == 0 && y == 0)
+		if (y > N - 1)
+			return 0;
+		if (y == N - 1 && x == N - 1)
 			return 1;
-		
-		return MoveTo(x-1,y)+MoveTo(x,y-1);
+
+		return move(N, x + 1, y) + move(N, x, y + 1);
 	}
-	
-	public static BigInteger MoveTo2(int x, int y, Hashtable<String,BigInteger> ht)
-	{	
-		if(x < 0 || y < 0)
-			return BigInteger.valueOf(0);
-		
-		if(x == 0 && y == 0)
-			return BigInteger.valueOf(1);
-		
-		String key = x+"-"+y;
-		if(ht.containsKey(key))
-		{
-			//System.out.println(key);		
-			return ht.get(key);
-		}
+
+	private Integer move_cache(int N, int x, int y, Map<String, Integer> cache) {
+
+		String str = x + "-" + y;
+
+		if (cache.containsKey(str))
+			return cache.get(str);
+
+		iteration++;
+		int approaches = 0;
+		if (x > N - 1)
+			approaches = 0;
+		else if (y > N - 1)
+			approaches = 0;
+		else if (y == N - 1 && x == N - 1)
+			approaches = 1;
 		else
-		{
-			//System.out.println(key);	
-			ht.put(key,MoveTo2(x-1,y,ht).add(MoveTo2(x,y-1,ht)));
-			return ht.get(key);
-		}
+			approaches = move_cache(N, x + 1, y, cache)
+					+ move_cache(N, x, y + 1, cache);
+		
+		cache.put(str, approaches);
+
+		return approaches;
 	}
 
+	@DataProvider
+	public static Object[][] dataProvider() {
+		return new Object[][] { { 2 }, { 3 } };
+	}
 }
-
