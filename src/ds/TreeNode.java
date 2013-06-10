@@ -12,6 +12,7 @@ public class TreeNode<T> {
 	public boolean visited = false;
 	public TreeNode<T> left;
 	public TreeNode<T> right;
+	public TreeNode<T> parent;
 	public T data;
 
 	public TreeNode(T data) {

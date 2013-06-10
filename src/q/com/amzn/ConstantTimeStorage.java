@@ -23,9 +23,15 @@ public class ConstantTimeStorage {
 
 		public void insert(int i) {
 			
+			Node n = new Node();
+			n.value = i;
+			
 			if (tailIndex[i] == null) {
-				tailIndex[i] = new Node();
-				tailIndex[i].value = i;
+				tailIndex[i] = n;
+			}else{
+				n.parent = tailIndex[i];
+				tailIndex[i].child = n;
+				tailIndex[i] = n;
 			}
 		}
 
