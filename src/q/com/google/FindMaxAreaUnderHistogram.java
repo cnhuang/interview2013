@@ -93,6 +93,8 @@ public class FindMaxAreaUnderHistogram extends Question {
 			// i might become a blocker for the following histogram.
 			leftBlockers.push(i);
 		}
+		
+		Log(Arrays.toString(availableArea));
 
 		// same from the right
 		for (int i = arr.length - 1; i >= 0; i--) {
@@ -126,6 +128,8 @@ public class FindMaxAreaUnderHistogram extends Question {
 			rightBlockers.push(i);
 		}
 
+		Log(Arrays.toString(availableArea));
+		
 		int max = Integer.MIN_VALUE;
 		int maxIndex = -1;
 
@@ -143,11 +147,10 @@ public class FindMaxAreaUnderHistogram extends Question {
 
 	@DataProvider
 	public static Object[][] dataProvider() {
-		return new Object[][] {
-				{ new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 } },
+		return new Object[][] { { new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 } },
 				{ new Integer[] { 9, 8, 7, 6, 5, 4, 3, 2, 1 } },
 				{ new Integer[] { 1, 2, 3, 4, 5, 4, 3, 2, 1 } },
 				{ new Integer[] { 9, 8, 7, 6, 5, 6, 7, 8, 9 } },
-				{ new Integer[] { 1, 1, 1, 1, 1, 1, 1, 1 } } };
+				{ new Integer[] { 1, 1, 1, 1, 1, 1, 1, 1 } }, { new Integer[] { 1,2,3,2,1 } } };
 	}
 }
