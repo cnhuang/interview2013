@@ -21,11 +21,74 @@ public class DFS extends Question {
 	@Test(dataProvider = "dataProvider")
 	public void testDFS(TreeNode<Integer> root) {
 
-		Log("Input:\n" + root.print());
+		//Log("Input:\n" + root.print());
 
 		Log("iterative_PreOrder:" + iterative_PreOrder(root));
+		Log("recursive_PreOrder:" + recursive_PreOrder(root));
+		
 		Log("iterative_InOrder:" + iterative_InOrder(root));
+		Log("recursive_InOrder:" + recursive_InOrder(root));
+		
 		Log("iterative_PostOrder:" + iterative_PostOrder(root));
+		Log("recursive_PostOrder:" + recursive_PostOrder(root));
+	}
+
+	public static List<TreeNode<Integer>> recursive_PostOrder(TreeNode<Integer> root) {
+
+		List<TreeNode<Integer>> result = new LinkedList<TreeNode<Integer>>();
+
+		recursive_PostOrder(root, result);
+
+		return result;
+	}
+
+	private static void recursive_PostOrder(TreeNode<Integer> root, List<TreeNode<Integer>> result) {
+
+		if (root == null)
+			return;
+
+		recursive_PostOrder(root.left, result);
+		recursive_PostOrder(root.right, result);
+		result.add(root);
+
+	}
+
+	public static List<TreeNode<Integer>> recursive_PreOrder(TreeNode<Integer> root) {
+
+		List<TreeNode<Integer>> result = new LinkedList<TreeNode<Integer>>();
+
+		recursive_PreOrder(root, result);
+
+		return result;
+	}
+
+	private static void recursive_PreOrder(TreeNode<Integer> root, List<TreeNode<Integer>> result) {
+
+		if (root == null)
+			return;
+
+		result.add(root);
+		recursive_PreOrder(root.left, result);
+		recursive_PreOrder(root.right, result);
+	}
+
+	public static List<TreeNode<Integer>> recursive_InOrder(TreeNode<Integer> root) {
+
+		List<TreeNode<Integer>> result = new LinkedList<TreeNode<Integer>>();
+
+		recursive_InOrder(root, result);
+
+		return result;
+	}
+
+	private static void recursive_InOrder(TreeNode<Integer> root, List<TreeNode<Integer>> result) {
+
+		if (root == null)
+			return;
+
+		recursive_InOrder(root.left, result);
+		result.add(root);
+		recursive_InOrder(root.right, result);
 	}
 
 	public static List<TreeNode<Integer>> iterative_InOrder(TreeNode<Integer> root) {
@@ -110,7 +173,7 @@ public class DFS extends Question {
 				stack.pop();
 
 		}
-		
+
 		TreeNode.cleanVisited(root);
 		return result;
 

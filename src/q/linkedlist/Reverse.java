@@ -14,7 +14,7 @@ public class Reverse extends Question {
 	public String getQuestion() {
 		return "Reverse a linkedlist";
 	}
-
+	
 	@Test(dataProvider = "TestCases")
 	public void resolve_singleLink(Node<Integer> node) {
 		Log("Original list:" + node);

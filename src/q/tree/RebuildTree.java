@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import ds.TreeNode;
 
-
 import util.Question;
 
 public class RebuildTree extends Question {
@@ -18,56 +17,87 @@ public class RebuildTree extends Question {
 	}
 
 	@Test(dataProvider = "dataProvider")
-	public void testRebuild(TreeNode<Integer> root) {
+	public void testRebuild2(TreeNode<Integer> root) {
 
-		Log("Input:\n" + root.print());
+		// Log("Input:\n" + root.print());
 
 		List<TreeNode<Integer>> preOrder = DFS.iterative_PreOrder(root);
 		List<TreeNode<Integer>> inOrder = DFS.iterative_InOrder(root);
 
-		Log("Output:\n" + rebuild(inOrder, preOrder).print());
+		Log("Input preOrder2:\n" + preOrder);
+		Log("Input inOrder2:\n" + inOrder);
+
+		TreeNode<Integer> output = rebuild2(inOrder, preOrder);
+
+		Log("Output preOrder2:\n" + DFS.iterative_PreOrder(output));
+		Log("Output inOrder2:\n" + DFS.iterative_InOrder(output));
 	}
 
-	public static TreeNode<Integer> rebuild(List<TreeNode<Integer>> inOrder,
+	public static TreeNode<Integer> rebuild2(List<TreeNode<Integer>> inOrder,
 			List<TreeNode<Integer>> preOrder) {
 
-		return rebuild(inOrder, preOrder, 0, 0, inOrder.size());
-	}
-
-	public static TreeNode<Integer> rebuild(List<TreeNode<Integer>> inOrder,
-			List<TreeNode<Integer>> preOrder, int index, int s, int e) {
-
-		// Log("\ninOrder:" + inOrder.subList(s, e));
-		// Log("preOrder:" + preOrder);
-		// Log("Index:" + index + ", s:" + s + ", e:" + e);
-
-		if (index >= inOrder.size())
+		if (inOrder.size() == 0)
 			return null;
 
-		if (s >= e)
-			return null;
+		TreeNode<Integer> head = new TreeNode<Integer>(preOrder.get(0).data);
 
-		TreeNode<Integer> node = new TreeNode<Integer>(preOrder.get(index).data);
+		for (int i = 0; i < inOrder.size(); i++) {
 
-		// Log("node:" + node);
+			if (inOrder.get(i).data == head.data) {
 
-		for (int i = s; i < e; i++) {
-			if (inOrder.get(i).data == node.data) {
-				// Log("node " + node + " left:");
-				node.left = rebuild(inOrder, preOrder, index + 1, s, i);
-
-				// Log("node " + node + " right:");
-				node.right = rebuild(inOrder, preOrder, index + i - s + 1, i + 1, e);
-				break;
+				head.left = rebuild2(inOrder.subList(0, i), preOrder.subList(1, i + 1));
+				head.right = rebuild2(inOrder.subList(i + 1, inOrder.size()),
+						preOrder.subList(i + 1, preOrder.size()));
 			}
 		}
 
-		return node;
+		return head;
 	}
+
+	@Test(dataProvider = "dataProvider")
+	public void testRebuild3(TreeNode<Integer> root) {
+
+		// Log("Input:\n" + root.print());
+
+		List<TreeNode<Integer>> preOrder = DFS.iterative_PreOrder(root);
+		List<TreeNode<Integer>> inOrder = DFS.iterative_InOrder(root);
+
+		Log("Input preOrder3:\n" + preOrder);
+		Log("Input inOrder3:\n" + inOrder);
+
+		TreeNode<Integer> output = rebuild3(inOrder, 0, preOrder, 0, inOrder.size());
+
+		Log("Output preOrder3:\n" + DFS.iterative_PreOrder(output));
+		Log("Output inOrder3:\n" + DFS.iterative_InOrder(output));
+	}
+
+	public static TreeNode<Integer> rebuild3(List<TreeNode<Integer>> inOrder, int inS,
+			List<TreeNode<Integer>> preOrder, int preS, int size) {
+
+		if (size == 0)
+			return null;
+
+		TreeNode<Integer> head = new TreeNode<Integer>(preOrder.get(preS).data);
+
+		for (int i = 0; i < size; i++) {
+
+			int index = inS + i;
+
+			if (inOrder.get(index).data == head.data) {
+
+				head.left = rebuild3(inOrder, inS, preOrder, preS + 1, i);
+				head.right = rebuild3(inOrder, index + 1, preOrder, preS + 1 + i, size - i - 1);
+			}
+		}
+
+		return head;
+
+	}
+
 
 	@DataProvider
 	public static Object[][] dataProvider() {
 
-		return new Object[][] { { TreeNode.getRandomTree() } };
+		return new Object[][] { { TreeNode.getRandomTree(10) } };
 	}
 }

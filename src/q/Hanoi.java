@@ -15,7 +15,7 @@ public class Hanoi extends Question {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Test(dataProvider="dataProvider")
+	@Test(dataProvider = "dataProvider")
 	public void move(int size) {
 
 		Stack<Integer>[] stacks = new Stack[3];
@@ -33,17 +33,17 @@ public class Hanoi extends Question {
 	private void move(int size, Stack<Integer> from, Stack<Integer> to, Stack<Integer> buffer,
 			Stack<Integer>[] stacks) {
 
-		if (size == 1) {
-			Integer i = from.pop();
-			to.push(i);
-			Log("\n[0]" + stacks[0].toString());
-			Log("[1]" + stacks[1].toString());
-			Log("[2]" + stacks[2].toString());
-		} else {
-			move(size - 1, from, buffer, to, stacks);
-			move(1, from, to, buffer, stacks);
-			move(size - 1, buffer, to, from, stacks);
-		}
+		if (size == 0)
+			return;
+
+		move(size - 1, from, buffer, to, stacks);
+
+		to.add(from.pop());
+		Log("\n[0]" + stacks[0].toString());
+		Log("[1]" + stacks[1].toString());
+		Log("[2]" + stacks[2].toString());
+
+		move(size - 1, buffer, to, from, stacks);
 	}
 
 	@DataProvider(name = "dataProvider")

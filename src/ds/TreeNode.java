@@ -29,7 +29,7 @@ public class TreeNode<T> {
 	public String print(boolean indent) {
 
 		String indentStr = indent ? " " : "";
-		
+
 		StringBuffer sb = new StringBuffer();
 		List<List<String>> lists = new LinkedList<List<String>>();
 		int maxString = 0;
@@ -102,6 +102,11 @@ public class TreeNode<T> {
 	public static TreeNode<Integer> getRandomTree() {
 
 		return getRandomTree(new boolean[50], 0, 50);
+	}
+
+	public static TreeNode<Integer> getRandomTree(int size) {
+
+		return getRandomTree(new boolean[size], 0, size);
 	}
 
 	private static TreeNode<Integer> getRandomTree(boolean[] cache, int start, int end) {
