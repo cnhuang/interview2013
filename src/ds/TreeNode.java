@@ -31,6 +31,7 @@ public class TreeNode<T> {
 		String indentStr = indent ? " " : "";
 
 		StringBuffer sb = new StringBuffer();
+		sb.append("\n\n");
 		List<List<String>> lists = new LinkedList<List<String>>();
 		int maxString = 0;
 
@@ -109,7 +110,8 @@ public class TreeNode<T> {
 		return getRandomTree(new boolean[size], 0, size);
 	}
 
-	private static TreeNode<Integer> getRandomTree(boolean[] cache, int start, int end) {
+	private static TreeNode<Integer> getRandomTree(boolean[] cache, int start,
+			int end) {
 
 		if (end <= start)
 			return null;
@@ -140,7 +142,8 @@ public class TreeNode<T> {
 		return getBinarySearchTree(new boolean[50], 0, 50);
 	}
 
-	public static TreeNode<Integer> getBinarySearchTree(boolean[] cache, int start, int end) {
+	public static TreeNode<Integer> getBinarySearchTree(boolean[] cache,
+			int start, int end) {
 
 		if (end <= start)
 			return null;
@@ -159,7 +162,8 @@ public class TreeNode<T> {
 		if (data == null)
 			return null;
 
-		System.out.println("Start: " + start + ",End:" + end + ", Data:" + data);
+		System.out
+				.println("Start: " + start + ",End:" + end + ", Data:" + data);
 
 		TreeNode<Integer> n = new TreeNode<Integer>(data);
 		n.left = getBinarySearchTree(cache, start, data - 1);
@@ -185,6 +189,28 @@ public class TreeNode<T> {
 		}
 
 		return t;
+	}
+
+	public static TreeNode<Integer> getSimpleTree(int size) {
+
+		return getSimpleTree(0, size - 1);
+
+	}
+
+	private static TreeNode<Integer> getSimpleTree(int s, int e) {
+
+		if (s > e)
+			return null;
+
+		int middle = (s + e) / 2;
+
+		TreeNode<Integer> node = new TreeNode<Integer>();
+		node.data = middle;
+
+		node.left = getSimpleTree(s, middle - 1);
+		node.right = getSimpleTree(middle + 1, e);
+
+		return node;
 	}
 
 	@Test

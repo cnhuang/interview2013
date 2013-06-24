@@ -80,12 +80,12 @@ public class MergeBSTs extends Question {
 
 		}
 
-		TreeNode<Integer> t = head;
-		while (t != null) {
-			t.visited = false;
-			t.right = null;
-			t = t.left;
-		}
+//		TreeNode<Integer> t = head;
+//		while (t != null) {
+//			t.visited = false;
+//			t.right = null;
+//			t = t.left;
+//		}
 
 		Log(head.print());
 
