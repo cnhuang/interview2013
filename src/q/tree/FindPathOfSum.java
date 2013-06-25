@@ -3,24 +3,24 @@ package q.tree;
 import java.util.ArrayList;
 import java.util.List;
 
-import datastructure.BinaryTree;
-import atom.TreeNode;
+import ds.TreeNode;
+
 
 public class FindPathOfSum
 {
 	//Crack code interview p33
 	public static void main(String[] args)
 	{
-		TreeNode t = BinaryTree.BuildRandomTree(500);
+		TreeNode<Integer> t = TreeNode.getRandomTree(500);
 		Find(t,new ArrayList<Integer>(),20);
 	}
 	
-	public static void Find(TreeNode t, List<Integer> buffer, int sum)
+	public static void Find(TreeNode<Integer> t, List<Integer> buffer, int sum)
 	{
 		if(t == null)
 			return;
 		else
-			buffer.add(t.Data);
+			buffer.add(t.data);
 		
 		int tmp = 0;
 		StringBuilder sb = new StringBuilder();
@@ -34,8 +34,8 @@ public class FindPathOfSum
 			}
 		}
 		
-		Find(t.Left,buffer,sum);
-		Find(t.Right,buffer,sum);
+		Find(t.left,buffer,sum);
+		Find(t.right,buffer,sum);
 		buffer.remove(buffer.size()-1);
 		
 	}
