@@ -11,6 +11,10 @@ public class DistanceMaximizingProblem extends Question {
 
 	@Override
 	public String getQuestion() {
+		/**
+		 * Given an array A of integers, find the maximum of j-i subjected to
+		 * the constraint of A[i] < A[j].
+		 */
 		return "http://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/\n"
 				+ "http://leetcode.com/2011/05/a-distance-maximizing-problem.html";
 	}
@@ -53,14 +57,13 @@ public class DistanceMaximizingProblem extends Question {
 
 	@DataProvider
 	public static Object[][] dataProvider() {
-		return new Object[][] {
-				{ new Integer[] { 34, 8, 10, 3, 2, 80, 30, 33, 1 }, 6 },
+		return new Object[][] { { new Integer[] { 34, 8, 10, 3, 2, 80, 30, 33, 1 }, 6 },
 
-				{ new Integer[] { 9, 2, 3, 4, 5, 6, 7, 8, 18, 0 }, 8 },
+		{ new Integer[] { 9, 2, 3, 4, 5, 6, 7, 8, 18, 0 }, 8 },
 
-				{ new Integer[] { 1, 2, 3, 4, 5, 6 }, 5 },
+		{ new Integer[] { 1, 2, 3, 4, 5, 6 }, 5 },
 
-				{ new Integer[] { 6, 5, 4, 3, 2, 1 }, -1 }
+		{ new Integer[] { 6, 5, 4, 3, 2, 1 }, -1 }
 
 		};
 	}

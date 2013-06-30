@@ -26,27 +26,18 @@ public class FindContiguousNumWithMaxSum extends Question {
 		for (int i = 0; i < input.length; i++) {
 
 			if (local == null) {
-				local = new SubSeq();
-				local.start = i;
-				local.end = i;
-				local.sum = input[i];
+				local = new SubSeq(i, i, input[i]);
 			} else {
 				if (local.sum + input[i] >= 0 && local.sum >= 0) {
 					local.sum += input[i];
 					local.end = i;
 				} else {
-					local = new SubSeq();
-					local.start = i;
-					local.end = i;
-					local.sum = input[i];
+					local = new SubSeq(i, i, input[i]);
 				}
 			}
 
 			if (max == null || local.sum > max.sum) {
-				max = new SubSeq();
-				max.sum = local.sum;
-				max.start = local.start;
-				max.end = local.end;
+				max = new SubSeq(local);
 			}
 		}
 
@@ -58,15 +49,25 @@ public class FindContiguousNumWithMaxSum extends Question {
 		int start;
 		int end;
 		int sum;
+
+		public SubSeq(int s, int e, int sum) {
+			start = s;
+			end = e;
+			this.sum = sum;
+		}
+
+		public SubSeq(SubSeq seq) {
+			start = seq.start;
+			end = seq.end;
+			this.sum = seq.sum;
+		}
 	}
 
 	@DataProvider
 	public static Object[][] dataProvider() {
 
-		return new Object[][] {
-				{ new Integer[] { 2, 3, -8, -1, 2, 4, -2, 3 } },
-				{ new Integer[] { 5, -9, 6, -2, 3 } },
-				{ new Integer[] { -3, -10, -5 } },
+		return new Object[][] { { new Integer[] { 2, 3, -8, -1, 2, 4, -2, 3 } },
+				{ new Integer[] { 5, -9, 6, -2, 3 } }, { new Integer[] { -3, -10, -5 } },
 				{ new Integer[] { -3, -10, -5, -1 } } };
 	}
 
