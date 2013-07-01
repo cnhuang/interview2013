@@ -42,6 +42,7 @@ public class PalindromePartitioning extends Question {
 
 		Log(iteration);
 		Log(result);
+		Log(result.size());
 
 	}
 
@@ -77,15 +78,16 @@ public class PalindromePartitioning extends Question {
 	@Test
 	public void partition2() {
 
-		String s = "bb";
+		String s = "ltsqjodzeriqdtyewsrpfscozbyrpidadvsmlylqrviuqiynbscgmhulkvdzdicgdwvquigoepiwxjlydogpxdahyfhdnljshgjeprsvgctgnfgqtnfsqizonirdtcvblehcwbzedsmrxtjsipkyxk";
 
 		Map<String, List<List<String>>> cache = new HashMap<String, List<List<String>>>();
 
 		iteration = 0;
-		List<List<String>> result = partition_recursive2(s, cache);
+		List<List<String>> result = partition_recursive_efficient(s, cache);
 
 		Log(iteration);
 		Log(result);
+		Log(result.size());
 
 		int min = Integer.MAX_VALUE;
 
@@ -98,7 +100,8 @@ public class PalindromePartitioning extends Question {
 
 	}
 
-	private List<List<String>> partition_recursive2(String s,
+	@SuppressWarnings("unchecked")
+	private List<List<String>> partition_recursive_efficient(String s,
 			Map<String, List<List<String>>> cache) {
 
 		List<List<String>> result = new LinkedList<List<String>>();
@@ -120,12 +123,12 @@ public class PalindromePartitioning extends Question {
 
 			if (isPalindrome(subString)) {
 
-				List<List<String>> tmp = partition_recursive2(s.substring(i),
+				List<List<String>> tmp = partition_recursive_efficient(s.substring(i),
 						cache);
 
 				for (List<String> list : tmp) {
 
-					List<String> clone = (List<String>) ((LinkedList) list)
+					List<String> clone = (List<String>) ((LinkedList<String>) list)
 							.clone();
 					clone.add(0, subString);
 					result.add(clone);

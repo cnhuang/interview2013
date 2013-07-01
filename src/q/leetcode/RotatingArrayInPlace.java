@@ -40,6 +40,10 @@ public class RotatingArrayInPlace extends Question {
 				do {
 
 					index = (index + rotation) % arr.length;
+					
+					if(b[i])
+						break;
+					
 					int tmp = arr[index];
 					b[index] = true;
 					arr[index] = prev;

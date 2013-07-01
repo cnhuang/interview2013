@@ -1,6 +1,5 @@
 package q.leetcode;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import util.Question;

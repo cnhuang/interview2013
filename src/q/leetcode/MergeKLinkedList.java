@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-import q.leetcode.RemoveNthNodeFromLinkedList.ListNode;
-
 import util.Question;
 
 public class MergeKLinkedList extends Question {

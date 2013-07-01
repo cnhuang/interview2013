@@ -33,33 +33,27 @@ public class InsertIntoACyclicSortedList extends Question {
 		while (true) {
 
 			Node next = current.next;
+			boolean canInsert = false;
 
 			if (next == head) {
-
-				current.next = newNode;
-				newNode.next = next;
-				break;
-			}
-
-			if (current.value <= num && next.value >= num) {
-				current.next = newNode;
-				newNode.next = next;
-				break;
+				canInsert = true;
+			} else if (current.value <= num && next.value >= num) {
+				canInsert = true;
 			} else if (next.value < current.value) {
 
 				if (current.value >= num && next.value >= num) {
-					current.next = newNode;
-					newNode.next = next;
-					break;
+					canInsert = true;
 				} else if (current.value <= num && next.value <= num) {
-					current.next = newNode;
-					newNode.next = next;
-					break;
+					canInsert = true;
 				}
-
 			}
-			
-			current = current.next;
+
+			if (canInsert) {
+				current.next = newNode;
+				newNode.next = next;
+				break;
+			} else
+				current = current.next;
 		}
 
 		Log("After:" + head);
@@ -69,8 +63,7 @@ public class InsertIntoACyclicSortedList extends Question {
 	@DataProvider
 	public static Object[][] dataProvider() {
 
-		return new Object[][] {
-				{ Node.createLinkedList(new int[] { 4, 4 }), 2 },
+		return new Object[][] { { Node.createLinkedList(new int[] { 4, 4 }), 2 },
 				{ Node.createLinkedList(new int[] { 4, 4 }), 4 },
 				{ Node.createLinkedList(new int[] { 4, 4 }), 5 },
 				{ Node.createLinkedList(new int[] { 4, 4, 7 }), 2 },

@@ -29,11 +29,16 @@ public class PrintTreeInZigZagLevelOrder extends Question {
 
 			nextLv = new Stack<TreeNode<Integer>>();
 			String s = "";
+			
 			while (!currLv.isEmpty()) {
+				
 				TreeNode<Integer> n = currLv.pop();
+				
 				if (n == null)
 					continue;
+				
 				s += n.data + ",";
+				
 				if (level % 2 == 0) {
 					nextLv.add(n.left);
 					nextLv.add(n.right);

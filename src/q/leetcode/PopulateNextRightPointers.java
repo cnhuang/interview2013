@@ -5,8 +5,6 @@ import java.util.Queue;
 
 import org.testng.annotations.Test;
 
-import q.tree.DFS;
-
 import ds.TreeNode;
 
 import util.Question;
@@ -32,10 +30,6 @@ public class PopulateNextRightPointers extends Question {
 		while (!q.isEmpty()) {
 
 			Node n = q.poll();
-
-			if (n == null) {
-				continue;
-			}
 
 			n.nextRight = q.peek();
 

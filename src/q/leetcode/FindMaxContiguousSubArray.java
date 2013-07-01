@@ -1,4 +1,4 @@
-package q;
+package q.leetcode;
 
 import java.util.Arrays;
 
@@ -7,12 +7,19 @@ import org.testng.annotations.Test;
 
 import util.Question;
 
-public class FindContiguousNumWithMaxSum extends Question {
+public class FindMaxContiguousSubArray extends Question {
 
 	@Override
 	public String getQuestion() {
 
-		return "Find Contiguous Numbers With Max Sum In a given array.Cracking code interview 17.8";
+		/*
+		 * Find the contiguous subarray within an array (containing at least one
+		 * number) which has the largest sum.
+		 * 
+		 * For example, given the array [−2,1,−3,4,−1,2,1,−5,4], the contiguous
+		 * subarray [4,−1,2,1] has the largest sum = 6.
+		 */
+		return "http://leetcode.com/onlinejudge#question_50";
 	}
 
 	@Test(dataProvider = "dataProvider")
@@ -45,6 +52,14 @@ public class FindContiguousNumWithMaxSum extends Question {
 		Log("Subseq:" + max.start + " to " + max.end);
 	}
 
+	@DataProvider
+	public static Object[][] dataProvider() {
+
+		return new Object[][] { { new Integer[] { 2, 3, -8, -1, 2, 4, -2, 3 } },
+				{ new Integer[] { 5, -9, 6, -2, 3 } }, { new Integer[] { -3, -10, -5 } },
+				{ new Integer[] { -3, -10, -5, -1 } } };
+	}
+
 	private static class SubSeq {
 		int start;
 		int end;
@@ -62,13 +77,4 @@ public class FindContiguousNumWithMaxSum extends Question {
 			this.sum = seq.sum;
 		}
 	}
-
-	@DataProvider
-	public static Object[][] dataProvider() {
-
-		return new Object[][] { { new Integer[] { 2, 3, -8, -1, 2, 4, -2, 3 } },
-				{ new Integer[] { 5, -9, 6, -2, 3 } }, { new Integer[] { -3, -10, -5 } },
-				{ new Integer[] { -3, -10, -5, -1 } } };
-	}
-
 }

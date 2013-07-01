@@ -40,16 +40,17 @@ public class RemoveNthNodeFromLinkedList extends Question {
 		ListNode end = head;
 
 		for (int i = 0; i < n; i++) {
-			//means n > head.length
+			// means n > head.length
 			if (end == null)
 				return head;
 			end = end.next;
 		}
 
-		//remove head
+		// remove head
 		if (end == null)
 			return head.next;
 
+		// important looking for end.next != null instead of end != null
 		while (end.next != null) {
 			current = current.next;
 			end = end.next;

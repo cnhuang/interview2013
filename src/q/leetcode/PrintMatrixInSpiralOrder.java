@@ -5,18 +5,22 @@ import java.util.Arrays;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import ds.Node;
 import util.Question;
 
 public class PrintMatrixInSpiralOrder extends Question {
 
 	@Override
 	public String getQuestion() {
+		/*
+		 * [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ]
+		 * 
+		 * You should return [1,2,3,6,9,8,7,4,5].
+		 */
 		return "http://leetcode.com/2010/05/printing-matrix-in-spiral-order.html";
 	}
 
 	@Test(dataProvider = "dataProvider")
-	public void split(int row, int col) {
+	public void print(int row, int col) {
 
 		int[][] arr = new int[row][col];
 		for (int i = 0; i < row; i++) {

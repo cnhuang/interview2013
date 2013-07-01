@@ -12,6 +12,14 @@ public class FindMinWindowInStrSContainsAllElemInStrT extends Question {
 
 	@Override
 	public String getQuestion() {
+		/*
+		 * Given a set T of characters and a string S, find the minimum window
+		 * in S which will contain all the characters in T in complexity O(n).
+		 * 
+		 * eg, S = ¡§ADOBECODEBANC¡¨ T = ¡§ABC¡¨
+		 * 
+		 * Minimum window is ¡§BANC¡¨.
+		 */
 		return "http://leetcode.com/2010/11/finding-minimum-window-in-s-which.html";
 	}
 
@@ -36,6 +44,20 @@ public class FindMinWindowInStrSContainsAllElemInStrT extends Question {
 
 	}
 
+	public static class CharIndex {
+
+		char c;
+		int index;
+
+		public CharIndex(char c, int index) {
+
+			this.c = c;
+			this.index = index;
+		}
+	}
+
+
+
 	public static class Result {
 
 		Map<Character, Integer> map = new HashMap<Character, Integer>();
@@ -53,6 +75,7 @@ public class FindMinWindowInStrSContainsAllElemInStrT extends Question {
 		public void set(char c, int index) {
 
 			if (map.containsKey(c)) {
+				
 				if (map.get(c) == -1) {
 					size++;
 				}

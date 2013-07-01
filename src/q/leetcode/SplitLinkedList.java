@@ -4,7 +4,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import ds.Node;
-import ds.TreeNode;
 
 import util.Question;
 
@@ -12,6 +11,13 @@ public class SplitLinkedList extends Question {
 
 	@Override
 	public String getQuestion() {
+		/*
+		 * Given a list, split it into two sublists ¡X one for the front half,
+		 * and one for the back half. If the number of elements is odd, the
+		 * extra element should go in the front list. So FrontBackSplit() on the
+		 * list {2, 3, 5, 7, 11} should yield the two lists {2, 3, 5} and {7,
+		 * 11}.
+		 */
 		return "http://leetcode.com/2010/09/splitting-linked-list.html";
 	}
 

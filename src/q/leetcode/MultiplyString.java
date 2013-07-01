@@ -27,7 +27,7 @@ public class MultiplyString extends Question {
 		if (num1 == null || num1.length() == 0 || num2 == null || num2.length() == 0)
 			return "0";
 
-		if (num1 == "0" || num2 == "0") {
+		if (num1.equals("0") || num2.equals("0")) {
 			return "0";
 		}
 
@@ -57,10 +57,11 @@ public class MultiplyString extends Question {
 			}
 
 			for (int j = longStr.length() - 1; j >= 0; j--) {
+
 				int n2 = Integer.valueOf(String.valueOf(longStr.charAt(j)));
 				int sum = n1 * n2 + carry;
 				int digit = sum % 10;
-				// Log(n1 + "x" + n2 + "+" + carry);
+
 				carry = sum / 10;
 				sb.insert(0, digit);
 			}
@@ -75,7 +76,7 @@ public class MultiplyString extends Question {
 			}
 		}
 
-		return "";
+		return preStr;
 	}
 
 	public String add(String num1, String num2) {
@@ -100,7 +101,7 @@ public class MultiplyString extends Question {
 			int digit = sum % 10;
 			carry = sum / 10;
 			sb.insert(0, digit);
-			
+
 			index1--;
 			index2--;
 		}
