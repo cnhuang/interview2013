@@ -68,7 +68,7 @@ public class LargestRectangleInHistogram extends Question {
 		Log(Arrays.toString(area));
 
 		stack = new Stack<Integer>();
-		
+
 		for (int i = height.length - 1; i >= 0; i--) {
 
 			while (!stack.isEmpty()) {
