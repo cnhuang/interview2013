@@ -16,7 +16,7 @@ public class RegularExpMatching extends Question {
 	@Test
 	public void match() {
 
-		String s = "abbbcd", p = "ab*bbbcd";
+		String s = "abbbcd", p = "a*b*bbbcd";
 		Log(isMatch(s, p));
 		Log(isMatch_efficient(s, p));
 	}
