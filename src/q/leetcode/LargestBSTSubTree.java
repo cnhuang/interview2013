@@ -16,15 +16,15 @@ public class LargestBSTSubTree extends Question {
 	}
 
 	@Test(dataProvider = "dataProvider")
-	public void find(TreeNode<Integer> root) {
+	public void test(TreeNode<Integer> root) {
 
 		Log("Input:" + root.print());
-		Result r = find2(root);
+		Result r = find(root);
 		Log("Out:" + r.maxTree.selfTree.print());
 
 	}
 
-	public Result find2(TreeNode<Integer> node) {
+	public Result find(TreeNode<Integer> node) {
 
 		Result r = new Result();
 		TreeNode<Integer> clone = new TreeNode<Integer>(node.data);
@@ -34,7 +34,7 @@ public class LargestBSTSubTree extends Question {
 		Result left = null;
 		if (node.left != null) {
 
-			left = find2(node.left);
+			left = find(node.left);
 
 			if (node.data > node.left.data) {
 				r.selfTree.left = left.selfTree;
@@ -45,7 +45,7 @@ public class LargestBSTSubTree extends Question {
 		Result right = null;
 		if (node.right != null) {
 
-			right = find2(node.right);
+			right = find(node.right);
 
 			if (node.data < node.right.data) {
 

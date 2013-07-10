@@ -1,5 +1,7 @@
 package q.leetcode;
 
+import org.testng.annotations.Test;
+
 import util.Question;
 
 public class SearchInsertPosition extends Question {
@@ -19,6 +21,12 @@ public class SearchInsertPosition extends Question {
 		return "http://leetcode.com/onlinejudge#question_35";
 	}
 
+	@Test
+	public void test() {
+		Log(searchInsert(new int[] { 1, 3, 5, 6 }, 2));
+		Log(searchInsert(new int[] { 1, 3, 4, 5, 6, 7 }, 2));
+	}
+
 	public int searchInsert(int[] A, int target) {
 
 		if (A == null || A.length == 0)
@@ -28,6 +36,8 @@ public class SearchInsertPosition extends Question {
 		int e = A.length - 1;
 
 		while (s <= e) {
+
+			Log(s + "," + e);
 
 			int mid = (s + e) / 2;
 			int midValue = A[mid];

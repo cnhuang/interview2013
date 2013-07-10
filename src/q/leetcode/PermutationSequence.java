@@ -33,7 +33,6 @@ public class PermutationSequence extends Question {
 	public String getPermutation(int n, int k) {
 
 		int divisor = 1;
-		int N = n - 1;
 
 		k = k - 1;
 
@@ -49,6 +48,7 @@ public class PermutationSequence extends Question {
 
 		String s = "";
 
+		int N = n - 1;
 		while (N > 0) {
 
 			Log("All:" + divisor);

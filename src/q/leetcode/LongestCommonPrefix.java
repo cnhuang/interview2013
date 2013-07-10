@@ -8,6 +8,10 @@ public class LongestCommonPrefix extends Question {
 
 	@Override
 	public String getQuestion() {
+		/*
+		 * Write a function to find the longest common prefix string amongst an
+		 * array of strings.
+		 */
 		return "http://leetcode.com/onlinejudge#question_14";
 	}
 
@@ -43,7 +47,7 @@ public class LongestCommonPrefix extends Question {
 
 				if (!stop)
 					sb.append(c);
-				
+
 				index++;
 			}
 		}

@@ -17,8 +17,13 @@ public class UseDFSToRealizeBFS extends Question {
 		 * to right, level by level). Output a newline after the end of each
 		 * level. Breadth First Search (BFS) is not allowed.
 		 * 
-		 * O(n) = 1(lv0) + 2(lv1) + 4(lv2) + .. + 2^LogN (lvLogN) =
-		 * (1-r^logN)/(1-r), r = 2 => N-1/1 = N
+		 * O(NlogN)
+		 * 
+		 * = logN(lv0) + LogN-1*2(lv1) + LogN-2*4(lv2) + .. + 1*2^LogN (lvLogN)
+		 * 
+		 * <= logN(1+2+4+...+2^LogN) 
+		 * 
+		 * = (logN)*(1-r^logN)/(1-r), r = 2 => (logN)N-1/1 = NlogN
 		 */
 		return "http://leetcode.com/2010/09/binary-tree-level-order-traversal-using_17.html";
 	}

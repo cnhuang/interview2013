@@ -38,7 +38,7 @@ public class InsertIntervals extends Question {
 		intervals.add(new Interval(6, 8));
 		intervals.add(new Interval(10, 12));
 		intervals.add(new Interval(13, 15));
-		ArrayList<Interval> result = insert(intervals, new Interval(4, 7));
+		ArrayList<Interval> result = insert(intervals, new Interval(0, 20));
 		Log(result);
 	}
 
@@ -56,39 +56,26 @@ public class InsertIntervals extends Question {
 			return intervals;
 		}
 
-		int index = 0;
+		for (Interval interval : intervals) {
 
-		while (index < intervals.size()) {
-
-			Interval interval = intervals.get(index);
-			if (interval.end < newInterval.start) {
-				index++;
+			if (newInterval == null) {
 				result.add(interval);
-			} else
-				break;
-		}
-
-		while (index < intervals.size()) {
-
-			Interval interval = intervals.get(index);
-			if (interval.start <= newInterval.end) {
-				newInterval.start = Math.min(interval.start, newInterval.start);
-				newInterval.end = Math.max(interval.end, newInterval.end);
-				index++;
-			} else {
+			} else if (newInterval.end < interval.start) {
+				// important
 				result.add(newInterval);
+				result.add(interval);
 				newInterval = null;
-				break;
+			} else if (newInterval.start > interval.end) {
+				// important: can't add newInterval, since multiple interval
+				// could < newInterval
+				result.add(interval);
+			} else {
+				newInterval.start = Math.min(newInterval.start, interval.start);
+				newInterval.end = Math.max(newInterval.end, interval.end);
 			}
 		}
 
-		while (index < intervals.size()) {
-			Interval interval = intervals.get(index);
-			index++;
-			result.add(interval);
-		}
-
-		if (newInterval != null)
+		if (null != newInterval)
 			result.add(newInterval);
 
 		return result;
